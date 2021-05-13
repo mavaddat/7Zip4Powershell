@@ -63,10 +63,10 @@ where he describes some usage scenarios with 7Zip4PowerShell.
 
 ## Where to get it
 
-7Zip4Powershell is published [as a NuGet package](https://nuget.org/packages/7Zip4Powershell/) and [at PowerShell Gallery](https://www.powershellgallery.com/packages/7Zip4Powershell).
+7Zip4Powershell is published at [PowerShell Gallery](https://www.powershellgallery.com/packages/7Zip4Powershell).
 
-[![NuGet](https://img.shields.io/nuget/v/7Zip4Powershell.svg?maxAge=2592000)](https://nuget.org/packages/7Zip4Powershell/)
-[![https://www.powershellgallery.com/packages/7Zip4Powershell](https://img.shields.io/badge/PowerShell%20Gallery-download-blue.svg)](https://www.powershellgallery.com/packages/7Zip4Powershell)
+
+[![https://www.powershellgallery.com/packages/7Zip4Powershell](https://img.shields.io/powershellgallery/v/7Zip4Powershell)](https://www.powershellgallery.com/packages/7Zip4Powershell)
 
 ## Customization
 
@@ -85,6 +85,10 @@ Compress-7Zip -Path . -ArchiveFileName demo.7z -CustomInitialization $initScript
 A list of all custom parameters can be found [here](https://sevenzip.osdn.jp/chm/cmdline/switches/method.htm).
 
 ## Changelog
+
+### [v2.0](https://github.com/thoemmi/7Zip4Powershell/releases/tag/v2.0)
+
+* Now based on .NET Standard 2.0 (thanks to [@kborowinski](https://github.com/kborowinski) for testing)
 
 ### [v1.13](https://github.com/thoemmi/7Zip4Powershell/releases/tag/v1.13)
 
