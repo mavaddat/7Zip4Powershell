@@ -79,6 +79,24 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
 
+    - name: Add Release Notes to Module Manifest
+      shell: pwsh
+      run: |
+        $ErrorActionPreference = 'Stop'
+        $releaseNotes = Get-Content -Path "release-notes.md" -Raw -ErrorAction Stop
+        if ([string]::IsNullOrWhiteSpace($releaseNotes)) { throw "Release notes file 'release-notes.md' is empty or whitespace-only" }
+
+        $psd1File = Join-Path $env:GITHUB_WORKSPACE "Module" "7Zip4Powershell" "7Zip4Powershell.psd1"
+        $manifest = Get-Content -Path $psd1File -Raw -ErrorAction Stop
+        $releaseNotesPlaceholder = "        # ReleaseNotes = ''"
+        $escapedReleaseNotes = $releaseNotes.Replace("'", "''")
+        $releaseNotesEntry = "        ReleaseNotes = '$escapedReleaseNotes'"
+        $updatedManifest = $manifest.Replace($releaseNotesPlaceholder, $releaseNotesEntry)
+        if ($updatedManifest -eq $manifest) { throw "ReleaseNotes placeholder not found in '$psd1File'" }
+
+        $updatedManifest | Set-Content -Path $psd1File
+        Test-ModuleManifest -Path $psd1File | Out-Null
+
     - name: Publish to PowerShell Gallery
       shell: pwsh
       run: |
@@ -93,4 +111,3 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         body_path: release-notes.md
-        
